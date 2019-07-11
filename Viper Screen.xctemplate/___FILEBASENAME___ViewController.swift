@@ -2,10 +2,10 @@
 // ___PROJECTNAME___
 //
 // Created by ___FULLUSERNAME___ on ___DATE___.
-//___COPYRIGHT___
+// ___COPYRIGHT___
 //
 
-import CoordinatorKit
+import UIKit
 
 /// Protocol that abstract the ___VARIABLE_productName:identifier___ViewController
 protocol ___VARIABLE_productName:identifier___View: BaseView {
@@ -51,8 +51,18 @@ final class ___VARIABLE_productName:identifier___ViewController: NiblessViewCont
 // MARK: - ___VARIABLE_productName:identifier___InteractorDelegate
 extension ___VARIABLE_productName:identifier___ViewController: ___VARIABLE_productName:identifier___InteractorDelegate {
     
-    func interactor(_ interactor: ___VARIABLE_productName:identifier___Interactor, didUpdate state: ___VARIABLE_productName:identifier___State) {
-        rootView.configure(for: state)
+    func interactor(_ interactor: ___VARIABLE_productName:identifier___InteractorInput, 
+                    didUpdate state: ___VARIABLE_productName:identifier___State) {
+        switch state {
+        case .loading:
+            break
+        case .idle:
+            break
+        case .success(let viewModel):
+            self.rootView.configure(with: viewModel)
+        case .failure(let error):
+            self.showError(error)
+        }
     }
 }
 
@@ -66,4 +76,15 @@ protocol ___VARIABLE_productName:identifier___ControllerFactory {
     func make___VARIABLE_productName:identifier___Controller() -> ___VARIABLE_productName:identifier___View
 }
 
+
+extension <# DependencyContainer #>: ___VARIABLE_productName:identifier___ControllerFactory, ___VARIABLE_productName:identifier___InteractorFactory {
+    func make___VARIABLE_productName:identifier___Controller() -> ___VARIABLE_productName:identifier___View {
+        return  ___VARIABLE_productName:identifier___ViewController(interactorFactory: self)
+    }
+
+    func make___VARIABLE_productName:identifier___Interactor() -> ___VARIABLE_productName:identifier___InteractorInput {
+        return  ___VARIABLE_productName:identifier___Interactor()
+    }
+
+}
 
