@@ -6,21 +6,17 @@
 //
 
 import UIKit
+import Reusable
 
 protocol ___VARIABLE_productName:identifier___RootViewDelegate: class {
     
 }
 
-final class ___VARIABLE_productName:identifier___RootView: NiblessView {
+final class ___VARIABLE_productName:identifier___RootView: UIView, NibReusable {
 
     unowned var delegate: ___VARIABLE_productName:identifier___RootViewDelegate?
     
     var viewModel = ___VARIABLE_productName:identifier___ViewModel()
-
-    init(delegate: ___VARIABLE_productName:identifier___RootViewDelegate) {
-        self.delegate = delegate
-        super.init(frame: .zero)
-    }
     
 }
 

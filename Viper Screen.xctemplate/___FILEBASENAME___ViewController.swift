@@ -26,20 +26,17 @@ final class ___VARIABLE_productName:identifier___ViewController: NiblessViewCont
     }
     
     /// The object responsible of the view business logic
-    lazy var interactor = interactorFactory
-        .make___VARIABLE_productName:identifier___Interactor()
+    var interactor: ___VARIABLE_productName:identifier___InteractorInput
     
-    /// The factory that instanciate the interactor
-    private let interactorFactory: ___VARIABLE_productName:identifier___InteractorFactory
-
     // MARK: - LifeCycle
-    init(interactorFactory: ___VARIABLE_productName:identifier___InteractorFactory) {
-        self.interactorFactory = interactorFactory
+    init(interactor: ___VARIABLE_productName:identifier___InteractorInput) {
+        self.interactor = interactor
         super.init()
     }
 
     override func loadView() {
-        view = ___VARIABLE_productName:identifier___RootView(delegate: self)
+        view = ___VARIABLE_productName:identifier___RootView.loadFromNib()
+        rootView.delegate = self
     }
     
     override func viewDidLoad() {
@@ -71,19 +68,16 @@ extension ___VARIABLE_productName:identifier___ViewController: ___VARIABLE_produ
     
 }
 
-/// ___VARIABLE_productName:identifier___View Factory
+// MARK: - ___VARIABLE_productName:identifier___Controller Factory
+/// ___VARIABLE_productName:identifier___Controller Factory
 protocol ___VARIABLE_productName:identifier___ControllerFactory {
     func make___VARIABLE_productName:identifier___Controller() -> ___VARIABLE_productName:identifier___View
 }
 
-
-extension <# DependencyContainer #>: ___VARIABLE_productName:identifier___ControllerFactory, ___VARIABLE_productName:identifier___InteractorFactory {
+extension ___VARIABLE_productName:identifier___ControllerFactory {
     func make___VARIABLE_productName:identifier___Controller() -> ___VARIABLE_productName:identifier___View {
-        return  ___VARIABLE_productName:identifier___ViewController(interactorFactory: self)
-    }
-
-    func make___VARIABLE_productName:identifier___Interactor() -> ___VARIABLE_productName:identifier___InteractorInput {
-        return  ___VARIABLE_productName:identifier___Interactor()
+        let interactor = ___VARIABLE_productName:identifier___Interactor()
+        return  ___VARIABLE_productName:identifier___ViewController(interactor: interactor)
     }
 
 }
